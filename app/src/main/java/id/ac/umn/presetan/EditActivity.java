@@ -70,10 +70,7 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        imageView = (ImageView) findViewById(R.id.image_preview);
-        Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
-        imageView.setImageBitmap(bitmap);
+        setContentView(R.layout.activity_edit);
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
 //        setSupportActionBar(toolbar);
@@ -85,18 +82,21 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator);
 
-//        loadImage();
+        loadImage();
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
     }
 
-//    private void loadImage() {
+    private void loadImage() {
+        imageView = (ImageView) findViewById(R.id.image_preview);
+        Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
+        imageView.setImageBitmap(bitmap);
 //        originalBitmap = BitmapUtils.getBitmapFromAssets(this, pictureName, 300, 300);
 //        filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
 //        finalBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
 //        imageView.setImageBitmap(originalBitmap);
-//    }
+    }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());

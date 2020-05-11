@@ -14,7 +14,7 @@
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="360dp"/>
-    <id.ac.umn.opengallery.Utils.NonSwipeableViewPager
+    <id.ac.umn.presetan.Utils.NonSwipeableViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="120dp"

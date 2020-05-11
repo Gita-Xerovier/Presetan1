@@ -6,6 +6,8 @@ import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import androidx.core.content.FileProvider;
 
 import com.zomato.photofilters.BuildConfig;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -150,6 +153,19 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(MainActivity.this, "The camera app is not compatible", Toast.LENGTH_SHORT).show();
                 }
+
+                //link gw pake
+                //https://stackoverflow.com/questions/11519691/passing-image-from-one-activity-another-activity
+                //convert bitmap ke array
+                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+
+                //passing byte arraynya ke intent berikutnya
+                Intent picturePass = new Intent(MainActivity.this, EditActivity.class);
+                picturePass.putExtra("image_path", byteArray);
+                startActivity(picturePass);
             }
         });
     }

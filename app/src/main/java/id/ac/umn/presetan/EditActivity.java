@@ -1,6 +1,7 @@
 package id.ac.umn.presetan;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +35,7 @@ import com.zomato.photofilters.imageprocessors.subfilters.SaturationSubfilter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import id.ac.umn.presetan.Adapter.ViewPagerAdapter;
 import id.ac.umn.presetan.Interface.EditImageFragmentListener;
@@ -66,6 +68,7 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
 
     //    private static final int PERMISSION_CODE = 1001;
 
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,16 +78,16 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
         Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
         imageView.setImageBitmap(bitmap);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
+        Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Presetan Filter");
 
         //View
-        img_preview = (ImageView)findViewById(R.id.image_preview);
-        tabLayout = (TabLayout)findViewById(R.id.tabs);
-        viewPager = (ViewPager)findViewById(R.id.viewpager);
-        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator);
+        img_preview = findViewById(R.id.image_preview);
+        tabLayout = findViewById(R.id.tabs);
+        viewPager = findViewById(R.id.viewpager);
+        coordinatorLayout = findViewById(R.id.coordinator);
 
         loadImage();
         setupViewPager(viewPager);
@@ -93,19 +96,33 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
 
     private void loadImage() {
         originalBitmap = BitmapUtils.getBitmapFromAssets(this, pictureName, 300, 300);
+        assert originalBitmap != null;
         filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
         finalBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
         img_preview.setImageBitmap(originalBitmap);
+
+        //ambil array dari bundle trus di convert ke bitmap image
+        //link gw pake
+        //https://stackoverflow.com/questions/11519691/passing-image-from-one-activity-another-activity
+        Bundle extras = getIntent().getExtras();
+        assert extras != null;
+        byte[] byteArray = extras.getByteArray("image_path");
+
+        assert byteArray != null;
+        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        ImageView image = findViewById(R.id.imageView);
+
+        image.setImageBitmap(bmp);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         filtersListFragment = new FiltersListFragment();
-        filtersListFragment.setListener((FiltersListFragmentListener) this);
+        filtersListFragment.setListener(this);
 
         editImageFragment = new EditImageFragment();
-        editImageFragment.setListener((EditImageFragmentListener) this);
+        editImageFragment.setListener(this);
 
         adapter.addFragment(filtersListFragment, "FILTERS");
         adapter.addFragment(editImageFragment, "EDIT");
@@ -272,6 +289,7 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PERMISSION_PICK_IMAGE) {
+            assert data != null;
             Bitmap bitmap = BitmapUtils.getBitmapFromGallery(this, data.getData(), 800, 800);
 
             //clear bitmap memory

@@ -25,23 +25,23 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"/>
 
-        <EditText
-            android:id="@+id/etSignUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Username"
-            android:textColorHint="#707070"
-            android:textColor="@color/colorPrimaryDark"
-            android:ems="10"
-            android:layout_below="@+id/tvSignUp"
-            android:layout_centerHorizontal="true" />
+<!--        <EditText-->
+<!--            android:id="@+id/etSignUsername"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="textPersonName"-->
+<!--            android:hint="Username"-->
+<!--            android:textColorHint="#707070"-->
+<!--            android:textColor="@color/colorPrimaryDark"-->
+<!--            android:ems="10"-->
+<!--            android:layout_below="@+id/tvSignUp"-->
+<!--            android:layout_centerHorizontal="true" />-->
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etSignUsername"
+            android:layout_below="@+id/tvSignUp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="49dp"
             android:ems="10"
@@ -59,14 +59,14 @@
             android:textColorHint="#707070"
             android:textColor="@color/colorPrimaryDark"
             android:ems="10"
-            android:layout_below="@+id/etSignUsername"
+            android:layout_below="@+id/etEmail"
             android:layout_centerHorizontal="true"/>
 
         <Button
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etEmail"
+            android:layout_below="@+id/etSignPassword"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:background="@color/colorAccent"

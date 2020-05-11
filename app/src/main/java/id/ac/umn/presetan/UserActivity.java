@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserActivity extends AppCompatActivity {
-    ImageView mImageView;
+//    ImageView mImageView;
     Button mChooseButton;
     private Button foto;
     private Uri imageUri;
@@ -44,14 +44,11 @@ public class UserActivity extends AppCompatActivity {
     };
     private static String appID = "namaAPK";
     private static final int PERMISSION_COUNT = 2;
-    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        Bundle extras = getIntent().getExtras();
-        username = extras.getString("username");
         init();
     }
     @Override
@@ -65,7 +62,6 @@ public class UserActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.profile:
                 Intent profile = new Intent(UserActivity.this, UserProfile.class);
-                profile.putExtra("uname", username);
                 startActivity(profile);
                 return true;
             case R.id.signOut:
@@ -116,7 +112,7 @@ public class UserActivity extends AppCompatActivity {
         if(!UserActivity.this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             findViewById(R.id.btnCamera).setVisibility(View.GONE);
         }
-        mImageView = findViewById(R.id.galleryView);
+//        mImageView = findViewById(R.id.galleryView);
         mChooseButton = findViewById(R.id.btnGallery);
         mChooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,9 +173,9 @@ public class UserActivity extends AppCompatActivity {
             return;
         }
 
-        if(resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            mImageView.setImageURI(data.getData());
-        }
+//        if(resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE){
+//            mImageView.setImageURI(data.getData());
+//        }
 
 //        if (requestCode == REQUEST_IMAGE_CAPTURE && requestCode == RESULT_OK) {
 //            Bundle extras = data.getExtras();

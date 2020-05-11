@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUp extends AppCompatActivity {
-    public EditText etSignUsername, etSignPassword, etEmail;
+    public EditText etSignPassword, etEmail;
     public Button btnSignUp;
     FirebaseAuth fAuth;
     ProgressBar progressBar;
@@ -28,7 +28,6 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        etSignUsername = findViewById(R.id.etSignUsername);
         etEmail = findViewById(R.id.etEmail);
         etSignPassword = findViewById(R.id.etSignPassword);
         btnSignUp = findViewById(R.id.btnSignUp);
@@ -73,10 +72,10 @@ public class SignUp extends AppCompatActivity {
                         if(task.isSuccessful()){
                             progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(SignUp.this, "User Created", Toast.LENGTH_SHORT).show();
-                            Intent passUser = new Intent(getApplicationContext(), UserActivity.class);
-                            passUser.putExtra("username", etSignUsername.getText());
-                            startActivity(passUser);
-                            //startActivity(new Intent(getApplicationContext(), UserActivity.class));
+//                            Intent passUser = new Intent(getApplicationContext(), UserActivity.class);
+//                            passUser.putExtra("username", etSignUsername.getText());
+//                            startActivity(passUser);
+                            startActivity(new Intent(getApplicationContext(), UserActivity.class));
                         }
                         else{
                             Toast.makeText(SignUp.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

@@ -10,23 +10,24 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
 public class UserProfile extends AppCompatActivity {
     private TextView user;
-    public String username;
+    FirebaseUser currUser;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
         user = findViewById(R.id.user);
+        currUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        Bundle extras = getIntent().getExtras();
-        username = extras.getString("username");
+        username = currUser.getEmail();
         user.setText(username);
     }
     @Override

@@ -31,7 +31,7 @@ import java.util.Objects;
 
 public class ChooseActivity extends AppCompatActivity {
     public static String pictureName;
-    ImageView mImageView;
+//    ImageView mImageView;
     Button mChooseButton;
     private Uri imageUri;
     private String pictureFilePath = null;
@@ -107,7 +107,7 @@ public class ChooseActivity extends AppCompatActivity {
         if(!ChooseActivity.this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             findViewById(R.id.btnCamera).setVisibility(View.GONE);
         }
-        mImageView = findViewById(R.id.galleryView);
+//        mImageView = findViewById(R.id.galleryView);
 
         mChooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,10 +171,10 @@ public class ChooseActivity extends AppCompatActivity {
             return;
         }
 
-        if(requestCode == IMAGE_PICK_CODE){
-            assert data != null;
-            mImageView.setImageURI(data.getData());
-        }
+//        if(requestCode == IMAGE_PICK_CODE){
+//            assert data != null;
+//            mImageView.setImageURI(data.getData());
+//        }
 
         ProgressDialog dialog = ProgressDialog.show(ChooseActivity.this, "Loading",
                 "Please Wait", true);

@@ -146,7 +146,7 @@ public class UserActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     if(photoFile != null) {
-                        imageUri = FileProvider.getUriForFile(UserActivity.this, BuildConfig.APPLICATION_ID + ".fileprovider", photoFile);
+                        imageUri = FileProvider.getUriForFile(UserActivity.this, "id.ac.umn.presetan.fileprovider", photoFile);
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                     }

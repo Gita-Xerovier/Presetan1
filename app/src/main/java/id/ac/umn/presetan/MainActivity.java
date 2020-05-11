@@ -157,15 +157,15 @@ public class MainActivity extends AppCompatActivity {
                 //link gw pake
                 //https://stackoverflow.com/questions/11519691/passing-image-from-one-activity-another-activity
                 //convert bitmap ke array
-                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background);
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
+//                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background);
+//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                byte[] byteArray = stream.toByteArray();
 
                 //passing byte arraynya ke intent berikutnya
-                Intent picturePass = new Intent(MainActivity.this, EditActivity.class);
-                picturePass.putExtra("image_path", byteArray);
-                startActivity(picturePass);
+//                Intent picturePass = new Intent(MainActivity.this, EditActivity.class);
+//                picturePass.putExtra("image_path", byteArray);
+//                startActivity(picturePass);
             }
         });
     }

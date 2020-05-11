@@ -29,15 +29,16 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         etSignUsername = findViewById(R.id.etSignUsername);
+        etEmail = findViewById(R.id.etEmail);
         etSignPassword = findViewById(R.id.etSignPassword);
         btnSignUp = findViewById(R.id.btnSignUp);
-        etEmail = findViewById(R.id.etEmail);
+
 
         fAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
 
         if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), UserActivity.class));
             finish();
         }
 
@@ -70,7 +71,10 @@ public class SignUp extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(SignUp.this, "User Created", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            Intent passUser = new Intent(getApplicationContext(), UserActivity.class);
+                            passUser.putExtra("username", etSignUsername.getText());
+                            startActivity(passUser);
+                            //startActivity(new Intent(getApplicationContext(), UserActivity.class));
                         }
                         else{
                             Toast.makeText(SignUp.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

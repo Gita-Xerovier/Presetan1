@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "592713768550",
+    "firebase_url": "https://presetan-eb337.firebaseio.com",
+    "project_id": "presetan-eb337",
+    "storage_bucket": "presetan-eb337.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592713768550:android:c71cfc76468f48f233d7a7",
+        "android_client_info": {
+          "package_name": "id.ac.umn.presetan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592713768550-952hg4612ag3iavo26j6dclqtt5hn5e6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.ac.umn.presetan",
+            "certificate_hash": "7df2c44026b5aa80a2013d1727cf4f51171156fb"
+          }
+        },
+        {
+          "client_id": "592713768550-03au49l1hhp08ld73sv2r87mflkb6iu5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN4dyrAFf1HEhfCIXiJ4wZEpQvr9dJcuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592713768550-03au49l1hhp08ld73sv2r87mflkb6iu5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

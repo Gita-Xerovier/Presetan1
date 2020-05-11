@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UserProfile"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <ImageView
+        android:id="@+id/profPic"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/npc"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="iniUsername (Placeholder)"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#53466e"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/profPic" />
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Thank you for registering :D"
+        android:layout_below="@id/user"/>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Logout"
+        android:onClick="logout"/>
+</RelativeLayout>

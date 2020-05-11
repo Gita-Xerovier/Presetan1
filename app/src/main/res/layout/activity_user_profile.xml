@@ -12,7 +12,14 @@
         android:src="@drawable/vip"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"/>
-
+    <TextView
+        android:id="@+id/greet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Greetings,"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/profPic"/>
     <TextView
         android:id="@+id/user"
         android:layout_width="wrap_content"
@@ -20,7 +27,7 @@
         android:text="iniUsername (Placeholder)"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="#53466e"
+        android:textColor="@color/color_option_menu"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:layout_below="@id/profPic" />
@@ -30,16 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         android:text="Thank you for registering :D"
         android:layout_below="@id/user"/>
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/msg"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:text="Logout"
-        android:onClick="logout"/>
 </RelativeLayout>

@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import java.lang.reflect.Field;
 
 public class NonSwipeableViewPager extends ViewPager {
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         return super.onInterceptTouchEvent(ev);

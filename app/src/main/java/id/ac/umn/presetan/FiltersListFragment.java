@@ -26,6 +26,10 @@ import id.ac.umn.presetan.Interface.FiltersListFragmentListener;
 import id.ac.umn.presetan.Utils.BitmapUtils;
 import id.ac.umn.presetan.Utils.SpacesItemDecoration;
 
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class FiltersListFragment extends Fragment implements FiltersListFragmentListener {
     RecyclerView recyclerView;
     ThumbnailAdapter adapter;

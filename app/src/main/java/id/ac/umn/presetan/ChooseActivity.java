@@ -27,51 +27,47 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
-public class UserActivity extends AppCompatActivity {
+public class ChooseActivity extends AppCompatActivity {
+    public static String pictureName;
     ImageView mImageView;
     Button mChooseButton;
-    private Button foto;
     private Uri imageUri;
     private String pictureFilePath = null;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
     private static final int REQUEST_PERMISSION = 1234;
+    private static final int PERMISSION_PICK_IMAGE = 1000;
     private static final String[] PERMISSIONS ={
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-    private static String appID = "namaAPK";
+    //    private static String appID = "namaAPK";
     private static final int PERMISSION_COUNT = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        mChooseButton = (Button)findViewById(R.id.btnGallery);
         init();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_menu, menu);
+        getMenuInflater().inflate(R.menu.guest_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.profile:
-                Intent profile = new Intent(UserActivity.this, UserProfile.class);
-                startActivity(profile);
-                return true;
-            case R.id.signOut:
-                Intent signOut = new Intent(UserActivity.this, ChooseActivity.class);
-                startActivity(signOut);
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.profile) {
+            Intent profile = new Intent(ChooseActivity.this, GuestProfile.class);
+            startActivity(profile);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @SuppressLint("NewApi")
@@ -93,9 +89,8 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void pickImageFromGallery(){
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, IMAGE_PICK_CODE);
+        Intent editIntent = new Intent(ChooseActivity.this, MainActivity.class);
+        startActivity(editIntent);
     }
 
     @Override
@@ -103,37 +98,25 @@ public class UserActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == REQUEST_PERMISSION && grantResults.length > 0) {
             if(notPermission()) {
-                ((ActivityManager) this.getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData();
+                ((ActivityManager) Objects.requireNonNull(this.getSystemService(ACTIVITY_SERVICE))).clearApplicationUserData();
             }
         }
     }
 
     private void init() {
-        if(!UserActivity.this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+        if(!ChooseActivity.this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             findViewById(R.id.btnCamera).setVisibility(View.GONE);
         }
         mImageView = findViewById(R.id.galleryView);
-        mChooseButton = findViewById(R.id.btnGallery);
+
         mChooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                            == PackageManager.PERMISSION_DENIED){
-                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        requestPermissions(permissions, PERMISSION_CODE);
-                    }
-                    else {
-                        pickImageFromGallery();
-                    }
-                }
-                else {
-                    pickImageFromGallery();
-                }
+                pickImageFromGallery();
             }
         });
 
-        foto = findViewById(R.id.btnCamera);
+        Button foto = findViewById(R.id.btnCamera);
         foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,18 +129,33 @@ public class UserActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     if(photoFile != null) {
-                        imageUri = FileProvider.getUriForFile(UserActivity.this, BuildConfig.APPLICATION_ID + ".fileprovider", photoFile);
+                        //imageUri = FileProvider.getUriForFile(MainActivity.this, BuildConfig.APPLICATION_ID + ".fileprovider", photoFile);
+                        imageUri = FileProvider.getUriForFile(ChooseActivity.this, "id.ac.umn.presetan.fileprovider", photoFile);
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                     }
                 } else {
-                    Toast.makeText(UserActivity.this, "The camera app is not compatible", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChooseActivity.this, "The camera app is not compatible", Toast.LENGTH_SHORT).show();
                 }
+
+                //link gw pake
+                //https://stackoverflow.com/questions/11519691/passing-image-from-one-activity-another-activity
+                //convert bitmap ke array
+//                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background);
+//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                byte[] byteArray = stream.toByteArray();
+//
+//                //passing byte arraynya ke intent berikutnya
+//                Intent picturePass = new Intent(ChooseActivity.this, MainActivity.class);
+//                picturePass.putExtra("image_path", byteArray);
+//                startActivity(picturePass);
             }
         });
     }
 
     private File createImageFile() throws IOException {
+        @SuppressLint("SimpleDateFormat")
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String pictureFile = "jpg_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -173,38 +171,18 @@ public class UserActivity extends AppCompatActivity {
             return;
         }
 
-        if(resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE){
+        if(requestCode == IMAGE_PICK_CODE){
+            assert data != null;
             mImageView.setImageURI(data.getData());
         }
 
-//        if (requestCode == REQUEST_IMAGE_CAPTURE && requestCode == RESULT_OK) {
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            kotakFoto.setImageBitmap((imageBitmap));
-//        }
-//        if(requestCode == REQUEST_IMAGE_CAPTURE) {
-//            if(imageUri == null) {
-//                SharedPreferences getPrefs = getSharedPreferences(appID, 0);
-//                String path = getPrefs.getString("path", "");
-//                if(path.length() < 1) {
-//                    recreate();
-//                    return;
-//                }
-//                imageUri = Uri.parse("file://" + path);
-//            }
-//            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, imageUri));
-//        } else if(data == null) {
-//            recreate();
-//            return;
-//        }
-
-        ProgressDialog dialog = ProgressDialog.show(UserActivity.this, "Loading",
+        ProgressDialog dialog = ProgressDialog.show(ChooseActivity.this, "Loading",
                 "Please Wait", true);
 
-        Intent editIntent = new Intent(UserActivity.this, MainActivity.class);
+        Intent editIntent = new Intent(ChooseActivity.this, MainActivity.class);
         editIntent.putExtra("image_path",pictureFilePath);
-        startActivity(editIntent);
 
+        startActivity(editIntent);
         dialog.cancel();
     }
 }

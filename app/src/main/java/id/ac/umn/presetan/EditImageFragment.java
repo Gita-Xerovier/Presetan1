@@ -10,9 +10,13 @@ import androidx.fragment.app.Fragment;
 
 import id.ac.umn.presetan.Interface.EditImageFragmentListener;
 
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class EditImageFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
     private EditImageFragmentListener listener;
-    private SeekBar seekbar_brightness, seekbar_constraint, seekbar_saturation;
+    SeekBar seekbar_brightness, seekbar_constraint, seekbar_saturation;
 
     public void setListener(EditImageFragmentListener listener) {
         this.listener = listener;
@@ -21,6 +25,7 @@ public class EditImageFragment extends Fragment implements SeekBar.OnSeekBarChan
     public EditImageFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

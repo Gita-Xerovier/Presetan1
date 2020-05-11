@@ -7,14 +7,14 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".MainActivity"
+    tools:context=".ChooseActivity"
     tools:showIn="@layout/activity_main">
     <ImageView
         android:id="@+id/image_preview"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="360dp"/>
-    <id.ac.umn.opengallery.Utils.NonSwipeableViewPager
+    <id.ac.umn.presetan.Utils.NonSwipeableViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="120dp"

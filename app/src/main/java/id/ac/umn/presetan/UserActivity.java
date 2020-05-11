@@ -44,14 +44,11 @@ public class UserActivity extends AppCompatActivity {
     };
     private static String appID = "namaAPK";
     private static final int PERMISSION_COUNT = 2;
-    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        Bundle extras = getIntent().getExtras();
-        username = extras.getString("username");
         init();
     }
     @Override
@@ -65,7 +62,6 @@ public class UserActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.profile:
                 Intent profile = new Intent(UserActivity.this, UserProfile.class);
-                profile.putExtra("uname", username);
                 startActivity(profile);
                 return true;
             case R.id.signOut:
@@ -150,7 +146,7 @@ public class UserActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     if(photoFile != null) {
-                        imageUri = FileProvider.getUriForFile(UserActivity.this, "id.ac.umn.presetan.fileprovider", photoFile);
+                        imageUri = FileProvider.getUriForFile(UserActivity.this, BuildConfig.APPLICATION_ID + ".fileprovider", photoFile);
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                     }

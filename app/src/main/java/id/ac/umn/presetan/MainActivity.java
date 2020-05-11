@@ -83,10 +83,13 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator);
 
+
         originalBitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
         if (originalBitmap != null) {
             loadImage();
+            //openImageFromGallery();
         } else {
+            loadImage();
             openImageFromGallery();
         }
         setupViewPager(viewPager);
@@ -94,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
     }
 
     private void loadImage() {
+        if (originalBitmap == null) {
+            originalBitmap = BitmapUtils.getBitmapFromAssets(this, pictureName, 300, 300);
+        }
         filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
         finalBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
         img_preview.setImageBitmap(originalBitmap);

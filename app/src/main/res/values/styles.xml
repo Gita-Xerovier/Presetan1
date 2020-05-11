@@ -18,7 +18,9 @@
         <item name="android:windowFullscreen">true</item>
         <item name="actionMenuTextColor">@color/color_option_menu</item>
     </style>
-
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+    </style>
     <style name="AppTheme.AppBarOverLay" parent="Theme.AppCompat.Light"/>
     <style name="AppTheme.PopupOverLay" parent="Theme.AppCompat.Light"/>
 

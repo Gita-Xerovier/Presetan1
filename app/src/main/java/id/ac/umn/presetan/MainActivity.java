@@ -3,6 +3,7 @@ package id.ac.umn.presetan;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -82,14 +83,17 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator);
 
-        loadImage();
-        openImageFromGallery();
+        originalBitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
+        if (originalBitmap != null) {
+            loadImage();
+        } else {
+            openImageFromGallery();
+        }
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
     }
 
     private void loadImage() {
-        originalBitmap = BitmapUtils.getBitmapFromAssets(this, pictureName, 300, 300);
         filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
         finalBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
         img_preview.setImageBitmap(originalBitmap);

@@ -1,11 +1,17 @@
 package id.ac.umn.presetan;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,11 +23,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,7 +66,7 @@ public class UserActivity extends AppCompatActivity {
                 startActivity(profile);
                 return true;
             case R.id.signOut:
-                Intent signOut = new Intent(UserActivity.this, ChooseActivity.class);
+                Intent signOut = new Intent(UserActivity.this, MainActivity.class);
                 startActivity(signOut);
                 finish();
                 return true;
@@ -201,7 +202,7 @@ public class UserActivity extends AppCompatActivity {
         ProgressDialog dialog = ProgressDialog.show(UserActivity.this, "Loading",
                 "Please Wait", true);
 
-        Intent editIntent = new Intent(UserActivity.this, MainActivity.class);
+        Intent editIntent = new Intent(UserActivity.this, EditActivity.class);
         editIntent.putExtra("image_path",pictureFilePath);
         startActivity(editIntent);
 

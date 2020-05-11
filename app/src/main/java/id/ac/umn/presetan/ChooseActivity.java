@@ -130,7 +130,7 @@ public class ChooseActivity extends AppCompatActivity {
                     }
                     if(photoFile != null) {
                         //imageUri = FileProvider.getUriForFile(MainActivity.this, BuildConfig.APPLICATION_ID + ".fileprovider", photoFile);
-                        imageUri = FileProvider.getUriForFile(ChooseActivity.this, "id.ac.umn.presetan.fileprovider", photoFile);
+                        imageUri = FileProvider.getUriForFile(ChooseActivity.this, "id.ac.umn.opengallery.fileprovider", photoFile);
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                     }

@@ -47,7 +47,7 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
 
     private static final int PERMISSION_PICK_IMAGE = 1000;
 
-    ImageView img_preview;
+    ImageView imageView;
     TabLayout tabLayout;
     ViewPager viewPager;
     CoordinatorLayout coordinatorLayout;
@@ -67,52 +67,35 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
     }
 
     //    private static final int PERMISSION_CODE = 1001;
-
-    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        ImageView imageView;
-        imageView = findViewById(R.id.imageView);
-        Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
-        imageView.setImageBitmap(bitmap);
 
-        Toolbar toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Presetan Filter");
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("Presetan Filter");
 
         //View
-        img_preview = findViewById(R.id.image_preview);
-        tabLayout = findViewById(R.id.tabs);
-        viewPager = findViewById(R.id.viewpager);
-        coordinatorLayout = findViewById(R.id.coordinator);
+        tabLayout = (TabLayout)findViewById(R.id.tabs);
+        viewPager = (ViewPager)findViewById(R.id.viewpager);
+        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator);
 
         loadImage();
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+
     }
 
     private void loadImage() {
-        originalBitmap = BitmapUtils.getBitmapFromAssets(this, pictureName, 300, 300);
-        assert originalBitmap != null;
-        filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
-        finalBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
-        img_preview.setImageBitmap(originalBitmap);
-
-        //ambil array dari bundle trus di convert ke bitmap image
-        //link gw pake
-        //https://stackoverflow.com/questions/11519691/passing-image-from-one-activity-another-activity
-        Bundle extras = getIntent().getExtras();
-        assert extras != null;
-        byte[] byteArray = extras.getByteArray("image_path");
-
-        assert byteArray != null;
-        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        ImageView image = findViewById(R.id.imageView);
-
-        image.setImageBitmap(bmp);
+        imageView = (ImageView) findViewById(R.id.image_preview);
+        Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
+        imageView.setImageBitmap(bitmap);
+//        originalBitmap = BitmapUtils.getBitmapFromAssets(this, pictureName, 300, 300);
+//        filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+//        finalBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+//        imageView.setImageBitmap(originalBitmap);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -130,13 +113,12 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
         viewPager.setAdapter(adapter);
     }
 
-
     @Override
     public void onBrightnessChanged(int brightness) {
         brightnessFinal = brightness;
         Filter myFilter = new Filter();
         myFilter.addSubFilter(new BrightnessSubFilter(brightness));
-        img_preview.setImageBitmap(myFilter.processFilter(finalBitmap.copy(Bitmap.Config.ARGB_8888, true)));
+        imageView.setImageBitmap(myFilter.processFilter(finalBitmap.copy(Bitmap.Config.ARGB_8888, true)));
     }
 
     @Override
@@ -144,7 +126,7 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
         saturationFinal = saturation;
         Filter myFilter = new Filter();
         myFilter.addSubFilter(new SaturationSubfilter(saturation));
-        img_preview.setImageBitmap(myFilter.processFilter(finalBitmap.copy(Bitmap.Config.ARGB_8888, true)));
+        imageView.setImageBitmap(myFilter.processFilter(finalBitmap.copy(Bitmap.Config.ARGB_8888, true)));
     }
 
     @Override
@@ -152,7 +134,7 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
         constraintFinal = constraint;
         Filter myFilter = new Filter();
         myFilter.addSubFilter(new ContrastSubFilter(constraint));
-        img_preview.setImageBitmap(myFilter.processFilter(finalBitmap.copy(Bitmap.Config.ARGB_8888, true)));
+        imageView.setImageBitmap(myFilter.processFilter(finalBitmap.copy(Bitmap.Config.ARGB_8888, true)));
     }
 
     @Override
@@ -163,10 +145,12 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
     @Override
     public void onEditCompleted() {
         Bitmap bitmap = filteredBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
         Filter myFilter = new Filter();
         myFilter.addSubFilter(new BrightnessSubFilter(brightnessFinal));
         myFilter.addSubFilter(new SaturationSubfilter(saturationFinal));
         myFilter.addSubFilter(new ContrastSubFilter(constraintFinal));
+
         finalBitmap = myFilter.processFilter(bitmap);
     }
 
@@ -174,7 +158,7 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
     public void onFilterSelected(Filter filter) {
         resetControl();
         filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
-        img_preview.setImageBitmap(filter.processFilter(finalBitmap));
+        imageView.setImageBitmap(filter.processFilter(finalBitmap));
         finalBitmap = filteredBitmap.copy(Bitmap.Config.ARGB_8888, true);
     }
 
@@ -289,7 +273,6 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PERMISSION_PICK_IMAGE) {
-            assert data != null;
             Bitmap bitmap = BitmapUtils.getBitmapFromGallery(this, data.getData(), 800, 800);
 
             //clear bitmap memory
@@ -300,7 +283,7 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
             originalBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
             finalBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
             filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
-            img_preview.setImageBitmap(originalBitmap);
+            imageView.setImageBitmap(originalBitmap);
             bitmap.recycle();
 
             //render selected

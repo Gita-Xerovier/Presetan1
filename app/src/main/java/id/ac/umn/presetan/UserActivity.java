@@ -44,7 +44,7 @@ public class UserActivity extends AppCompatActivity {
     };
     private static String appID = "namaAPK";
     private static final int PERMISSION_COUNT = 2;
-    private String username;
+    public String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class UserActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.profile:
                 Intent profile = new Intent(UserActivity.this, UserProfile.class);
-                profile.putExtra("uname", username);
+                profile.putExtra("username", username);
                 startActivity(profile);
                 return true;
             case R.id.signOut:

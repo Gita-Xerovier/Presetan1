@@ -37,10 +37,10 @@ public class SignUp extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), UserActivity.class));
-            finish();
-        }
+//        if(fAuth.getCurrentUser() != null){
+//            startActivity(new Intent(getApplicationContext(), SignUp.class));
+//            finish();
+//        }
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

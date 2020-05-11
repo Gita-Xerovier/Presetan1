@@ -37,14 +37,15 @@ public class SignUp extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
 
-        if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), UserActivity.class));
-            finish();
-        }
+//        if(fAuth.getCurrentUser() != null){
+//            startActivity(new Intent(getApplicationContext(), SignUp.class));
+//            finish();
+//        }
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 String email = etEmail.getText().toString().trim();
                 String password = etSignPassword.getText().toString().trim();
 
@@ -63,13 +64,14 @@ public class SignUp extends AppCompatActivity {
                     return;
                 }
 
-                progressBar.setVisibility(View.VISIBLE);
+
                 //register user ke firebase
 
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(SignUp.this, "User Created", Toast.LENGTH_SHORT).show();
                             Intent passUser = new Intent(getApplicationContext(), UserActivity.class);
                             passUser.putExtra("username", etSignUsername.getText());

@@ -14,8 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 
 public class UserProfile extends AppCompatActivity {
-    private String username;
     private TextView user;
+    public String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class UserProfile extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Bundle extras = getIntent().getExtras();
-        username = extras.getString("uname");
+        username = extras.getString("username");
         user.setText(username);
     }
     @Override

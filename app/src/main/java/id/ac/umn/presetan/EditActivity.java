@@ -1,6 +1,7 @@
 package id.ac.umn.presetan;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -69,33 +70,33 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        imageView = findViewById(R.id.image_preview);
-        Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
-        imageView.setImageBitmap(bitmap);
+        setContentView(R.layout.activity_edit);
 
-        Toolbar toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Presetan Filter");
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("Presetan Filter");
 
         //View
-        tabLayout = findViewById(R.id.tabs);
-        viewPager = findViewById(R.id.viewpager);
-        coordinatorLayout = findViewById(R.id.coordinator);
+        tabLayout = (TabLayout)findViewById(R.id.tabs);
+        viewPager = (ViewPager)findViewById(R.id.viewpager);
+        coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator);
 
-//        loadImage();
+        loadImage();
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
     }
 
-//    private void loadImage() {
+    private void loadImage() {
+        imageView = (ImageView) findViewById(R.id.image_preview);
+        Bitmap bitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
+        imageView.setImageBitmap(bitmap);
 //        originalBitmap = BitmapUtils.getBitmapFromAssets(this, pictureName, 300, 300);
 //        filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
 //        finalBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
 //        imageView.setImageBitmap(originalBitmap);
-//    }
+    }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -272,7 +273,6 @@ public class EditActivity extends AppCompatActivity implements FiltersListFragme
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PERMISSION_PICK_IMAGE) {
-            assert data != null;
             Bitmap bitmap = BitmapUtils.getBitmapFromGallery(this, data.getData(), 800, 800);
 
             //clear bitmap memory

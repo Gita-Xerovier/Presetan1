@@ -1,86 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".GuestProfile"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
-    <RelativeLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
-        <ImageView
-            android:id="@+id/profPic"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:src="@drawable/guest"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"/>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context=".GuestProfile"
+android:layout_height="match_parent"
+android:layout_width="match_parent">
+<ImageView
+    android:id="@+id/profPic"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:src="@drawable/guest"
+    android:layout_marginTop="20dp"
+    android:layout_centerHorizontal="true"/>
 
-        <TextView
-            android:id="@+id/welcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome,"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/profPic"/>
-        <TextView
-            android:id="@+id/user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Guest"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="#53466e"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/welcome" />
-        <TextView
-            android:id="@+id/msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="Please consider signing up to unlock more filters :D"
-            android:layout_below="@id/user"/>
-        <TextView
-            android:id="@+id/createAcc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(I'm interested)"
-            android:layout_marginTop="50dp"
-            android:layout_below="@id/msg"
-            android:layout_centerHorizontal="true"/>
+<TextView
+    android:id="@+id/welcome"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Welcome,"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp"
+    android:layout_below="@id/profPic"/>
+<TextView
+    android:id="@+id/user"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Guest"
+    android:textSize="20dp"
+    android:textStyle="bold"
+    android:textColor="#53466e"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/welcome" />
+<TextView
+    android:id="@+id/msg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp"
+    android:textStyle="bold"
+    android:textColor="@color/color_option_menu"
+    android:text="Please consider signing up to unlock more filters :D"
+    android:layout_below="@id/user"/>
+<!--        <TextView-->
+<!--            android:id="@+id/createAcc"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="(I'm interested)"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:layout_below="@id/msg"-->
+<!--            android:layout_centerHorizontal="true"/>-->
 
-        <Button
-            android:id="@+id/signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:text="Hook me up!"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_below="@id/createAcc"
-            android:background="@color/colorPrimary"/>
+<Button
+    android:id="@+id/signup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#ffffff"
+    android:textStyle="bold"
+    android:text="Hook me up!"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_below="@id/msg"
+    android:background="@color/colorPrimary"/>
 
-        <TextView
-            android:id="@+id/alrdRegist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/signup"
-            android:layout_alignLeft="@+id/msg"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="20dp"
-            android:text="Already registered?" />
+<TextView
+    android:id="@+id/alrdRegist"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/signup"
+    android:layout_alignLeft="@+id/msg"
+    android:layout_marginLeft="80dp"
+    android:layout_marginTop="10dp"
+    android:text="Already registered?" />
 
-        <TextView
-            android:id="@+id/click"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/signup"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/alrdRegist"
-            android:text="Sign in"
-            android:textColor="@color/colorAccent"/>
-    </RelativeLayout>
-</androidx.core.widget.NestedScrollView>
+<TextView
+    android:id="@+id/click"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/signup"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_toRightOf="@+id/alrdRegist"
+    android:text="Sign in"
+    android:textColor="@color/colorAccent"/>
+</RelativeLayout>

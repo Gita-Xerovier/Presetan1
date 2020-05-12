@@ -87,4 +87,9 @@ public class SignUp extends AppCompatActivity {
         });
 
     }
+
+    public void cancel(View view) {
+        startActivity(new Intent(getApplicationContext(), GuestProfile.class));
+        finish();
+    }
 }

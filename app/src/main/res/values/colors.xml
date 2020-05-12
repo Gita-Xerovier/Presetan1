@@ -7,4 +7,11 @@
     <color name="normal_filter">#8A8888</color>
     <color name="color_option_menu">#6D8F6F</color>
     <color name="bg">#DBDBDBDB</color>
+
+    <!--colors for modern ui-->
+    <color name="whiteTextColor">#fff</color>
+    <color name="primaryTextColor">#4E3F3F</color>
+    <color name="loginBkColor">#f0f0f0</color>
+    <!--colros for card-->
+    <color name="whiteCardColor">#fff</color>
 </resources>

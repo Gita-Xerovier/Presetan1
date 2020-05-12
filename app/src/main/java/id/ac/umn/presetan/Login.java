@@ -19,7 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
-    public TextView tvLogin;
+//    public TextView tvLogin;
     public EditText etEmail, etPassword;
     public Button btnLogin;
     FirebaseAuth fAuth;
@@ -33,10 +33,9 @@ public class Login extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        tvLogin = findViewById(R.id.tvLogin);
 
         fAuth = FirebaseAuth.getInstance();
-        progressBar2 = findViewById(R.id.progressBar2);
+        progressBar2 = findViewById(R.id.progressBar);
         progressBar2.setVisibility(View.INVISIBLE);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -82,5 +81,10 @@ public class Login extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public void cancel(View view) {
+        startActivity(new Intent(getApplicationContext(), GuestProfile.class));
+        finish();
     }
 }

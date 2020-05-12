@@ -22,6 +22,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Presetan Filter");
 
+
         //View
         img_preview = (ImageView)findViewById(R.id.image_preview);
         tabLayout = (TabLayout)findViewById(R.id.tabs);
@@ -110,13 +113,12 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
 
         filtersListFragment = new FiltersListFragment();
         filtersListFragment.setListener(this);
-
         adapter.addFragment(filtersListFragment, "FILTERS");
-        if(user == "Guest") {
-            editImageFragment = new EditImageFragment();
-            editImageFragment.setListener(this);
-            adapter.addFragment(editImageFragment, "EDIT");
-        }
+
+
+        editImageFragment = new EditImageFragment();
+        editImageFragment.setListener(this);
+        adapter.addFragment(editImageFragment, "EDIT");
 
         viewPager.setAdapter(adapter);
     }
@@ -127,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         Filter myFilter = new Filter();
         myFilter.addSubFilter(new BrightnessSubFilter(brightness));
         img_preview.setImageBitmap(myFilter.processFilter(finalBitmap.copy(Bitmap.Config.ARGB_8888, true)));
+
     }
 
     @Override
@@ -160,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         myFilter.addSubFilter(new ContrastSubFilter(constraintFinal));
 
         finalBitmap = myFilter.processFilter(bitmap);
-    }
+}
 
     @Override
     public void onFilterSelected(Filter filter) {

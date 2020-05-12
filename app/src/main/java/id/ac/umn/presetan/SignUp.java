@@ -76,6 +76,7 @@ public class SignUp extends AppCompatActivity {
 //                            passUser.putExtra("username", etSignUsername.getText());
 //                            startActivity(passUser);
                             startActivity(new Intent(getApplicationContext(), UserActivity.class));
+                            finish();
                         }
                         else{
                             Toast.makeText(SignUp.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

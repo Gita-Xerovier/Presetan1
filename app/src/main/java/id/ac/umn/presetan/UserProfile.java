@@ -47,6 +47,7 @@ public class UserProfile extends AppCompatActivity {
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getApplicationContext(), Login.class));
+        Global.login = -1;
         finish();
     }
 }

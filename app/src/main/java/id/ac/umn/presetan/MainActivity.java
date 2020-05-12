@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -124,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         }
         adapter.addFragment(filtersListFragment, "FILTERS");
 
-        if(username != "Guest") {
+        if(Global.login == 1) {
             editImageFragment = new EditImageFragment();
             editImageFragment.setListener(this);
             adapter.addFragment(editImageFragment, "EDIT");
@@ -313,4 +312,9 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

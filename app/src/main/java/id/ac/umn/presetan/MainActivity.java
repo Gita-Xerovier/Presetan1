@@ -91,11 +91,12 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         coordinatorLayout = (CoordinatorLayout)findViewById(R.id.coordinator);
 
-
-        originalBitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
-        originalBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
-
+        if (originalBitmap == null) {
+            originalBitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
+//            originalBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
+        }
         if (originalBitmap != null) {
+            originalBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
             loadImage();
             //openImageFromGallery();
         } else {

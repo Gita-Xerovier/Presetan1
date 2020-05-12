@@ -47,16 +47,19 @@ public class Login extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(email)){
                     etEmail.setError("Email is Required");
+                    progressBar2.setVisibility(View.INVISIBLE);
                     return;
                 }
 
                 if(TextUtils.isEmpty(password)){
                     etPassword.setError("Password is Required");
+                    progressBar2.setVisibility(View.INVISIBLE);
                     return;
                 }
 
                 if(password.length() < 6){
                     etPassword.setError("Password Must be >= 6 characters");
+                    progressBar2.setVisibility(View.INVISIBLE);
                     return;
                 }
 

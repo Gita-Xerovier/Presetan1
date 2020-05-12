@@ -50,16 +50,19 @@ public class SignUp extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(email)){
                     etEmail.setError("Email is Required");
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
 
                 if(TextUtils.isEmpty(password)){
                     etSignPassword.setError("Password is Required");
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
 
                 if(password.length() < 6){
                     etSignPassword.setError("Password Must be >= 6 characters");
+                    progressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
 

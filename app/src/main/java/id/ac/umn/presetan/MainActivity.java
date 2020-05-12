@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -76,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -89,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
 
 
         originalBitmap = BitmapFactory.decodeFile(getIntent().getStringExtra("image_path"));
+        originalBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
+
         if (originalBitmap != null) {
             loadImage();
             //openImageFromGallery();

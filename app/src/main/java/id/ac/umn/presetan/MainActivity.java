@@ -22,6 +22,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -34,6 +36,7 @@ import com.zomato.photofilters.imageprocessors.subfilters.SaturationSubfilter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import id.ac.umn.presetan.Adapter.ViewPagerAdapter;
 import id.ac.umn.presetan.Interface.EditImageFragmentListener;
@@ -42,8 +45,9 @@ import id.ac.umn.presetan.Utils.BitmapUtils;
 
 
 public class MainActivity extends AppCompatActivity implements FiltersListFragmentListener, EditImageFragmentListener {
-    public static final String pictureName = "flash.jpg";
-    public String user = "Guest";
+    public static final String pictureName = "flash.png";
+    //public String user = "Guest";
+    FirebaseUser currUser;
 
     private static final int PERMISSION_PICK_IMAGE = 1000;
 
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
@@ -107,12 +112,19 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        String username = "Guest";
 
         filtersListFragment = new FiltersListFragment();
         filtersListFragment.setListener(this);
 
+        currUser = FirebaseAuth.getInstance().getCurrentUser();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        if(currUser != null) {
+            username = currUser.getEmail();
+        }
         adapter.addFragment(filtersListFragment, "FILTERS");
-        if(user == "Guest") {
+
+        if(username != "Guest") {
             editImageFragment = new EditImageFragment();
             editImageFragment.setListener(this);
             adapter.addFragment(editImageFragment, "EDIT");
@@ -160,13 +172,14 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         myFilter.addSubFilter(new ContrastSubFilter(constraintFinal));
 
         finalBitmap = myFilter.processFilter(bitmap);
+        originalBitmap = null;
     }
 
     @Override
     public void onFilterSelected(Filter filter) {
         resetControl();
         filteredBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
-        img_preview.setImageBitmap(filter.processFilter(finalBitmap));
+        img_preview.setImageBitmap(filter.processFilter(filteredBitmap));
         finalBitmap = filteredBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
     }

@@ -93,9 +93,12 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void pickImageFromGallery(){
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, IMAGE_PICK_CODE);
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType("image/*");
+//        startActivityForResult(intent, IMAGE_PICK_CODE);
+        Intent editIntent = new Intent(UserActivity.this, MainActivity.class);
+        editIntent.putExtra("image_path",pictureFilePath);
+        startActivity(editIntent);
     }
 
     @Override

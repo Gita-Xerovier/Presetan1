@@ -73,6 +73,7 @@ public class Login extends AppCompatActivity {
 //                            Intent passUser = new Intent(getApplicationContext(), UserActivity.class);
 //                            passUser.putExtra("username", )
                             startActivity(new Intent(getApplicationContext(), UserActivity.class));
+                            finish();
                         }
                         else{
                             Toast.makeText(Login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

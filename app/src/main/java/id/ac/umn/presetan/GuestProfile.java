@@ -25,6 +25,7 @@ public class GuestProfile extends AppCompatActivity {
             public void onClick(View v){
                 Intent signUp = new Intent(GuestProfile.this, SignUp.class);
                 startActivity(signUp);
+                finish();
             }
         });
 
@@ -34,6 +35,7 @@ public class GuestProfile extends AppCompatActivity {
             public void onClick(View v){
                 Intent signIn = new Intent(GuestProfile.this, Login.class);
                 startActivity(signIn);
+                finish();
             }
         });
     }

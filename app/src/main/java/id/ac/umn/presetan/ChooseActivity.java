@@ -64,6 +64,7 @@ public class ChooseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.profile) {
             Intent profile = new Intent(ChooseActivity.this, GuestProfile.class);
+            Global.login = -1;
             startActivity(profile);
             return true;
         }

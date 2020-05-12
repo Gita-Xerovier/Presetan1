@@ -312,4 +312,9 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

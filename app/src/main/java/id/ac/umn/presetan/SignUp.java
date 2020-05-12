@@ -79,6 +79,7 @@ public class SignUp extends AppCompatActivity {
                             finish();
                         }
                         else{
+                            progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(SignUp.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                         }

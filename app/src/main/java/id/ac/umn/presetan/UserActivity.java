@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserActivity extends AppCompatActivity {
-//    ImageView mImageView;
+    //    ImageView mImageView;
     Button mChooseButton;
     private Button foto;
     private Uri imageUri;
@@ -93,7 +93,11 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void pickImageFromGallery(){
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType("image/*");
+//        startActivityForResult(intent, IMAGE_PICK_CODE);
         Intent editIntent = new Intent(UserActivity.this, MainActivity.class);
+//        editIntent.putExtra("image_path",pictureFilePath);
         startActivity(editIntent);
     }
 
@@ -112,6 +116,7 @@ public class UserActivity extends AppCompatActivity {
             findViewById(R.id.btnCamera).setVisibility(View.GONE);
         }
 //        mImageView = findViewById(R.id.galleryView);
+        mChooseButton = findViewById(R.id.btnGallery);
         mChooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

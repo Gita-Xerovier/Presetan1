@@ -31,7 +31,7 @@ import java.util.Objects;
 
 public class ChooseActivity extends AppCompatActivity {
     public static String pictureName;
-//    ImageView mImageView;
+    //    ImageView mImageView;
     Button mChooseButton;
     private Uri imageUri;
     private String pictureFilePath = null;

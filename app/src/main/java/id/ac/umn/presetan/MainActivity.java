@@ -118,16 +118,10 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        String username = "Guest";
 
         filtersListFragment = new FiltersListFragment();
         filtersListFragment.setListener(this);
 
-        currUser = FirebaseAuth.getInstance().getCurrentUser();
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        if(currUser != null) {
-            username = currUser.getEmail();
-        }
         adapter.addFragment(filtersListFragment, "FILTERS");
 
         if(Global.login == 1) {
@@ -178,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         myFilter.addSubFilter(new ContrastSubFilter(constraintFinal));
 
         finalBitmap = myFilter.processFilter(bitmap);
-        originalBitmap = null;
+        //originalBitmap = null;
     }
 
     @Override

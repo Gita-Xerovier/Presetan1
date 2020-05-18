@@ -78,6 +78,7 @@ public class SignUp extends AppCompatActivity {
 //                            Intent passUser = new Intent(getApplicationContext(), UserActivity.class);
 //                            passUser.putExtra("username", etSignUsername.getText());
 //                            startActivity(passUser);
+                            Global.login = 1;
                             startActivity(new Intent(getApplicationContext(), UserActivity.class));
                             finish();
                         }

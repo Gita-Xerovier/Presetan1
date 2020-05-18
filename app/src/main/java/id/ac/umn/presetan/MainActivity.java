@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements FiltersListFragme
         System.loadLibrary("NativeImageProcessor");
     }
 
-//    private static final int PERMISSION_CODE = 1001;
+    //    private static final int PERMISSION_CODE = 1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
